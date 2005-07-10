@@ -1,32 +1,20 @@
 #
-Summary:    Layer two tunelling protocol daemon
-Summary(pl):    Demon tuneluj±cy protoko³y warstwy drugiej
+Summary:	Layer two tunelling protocol daemon
+Summary(pl):	Demon tuneluj±cy protoko³y warstwy drugiej
 Name:		rp-l2tp
 Version:	0.4
 Release:	0.1
-License:	- (enter GPL/GPL v2/LGPL/BSD/BSD-like/other license name here)
-#Vendor:		-
-Group:      Networking/Daemons
-Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-URL:		-
+License:	GPL v2
+Group:		Networking/Daemons
+Source0:	http://dl.sourceforge.net/rp-l2tp/%{name}-%{version}.tar.gz
+# Source0-md5:	0e45d11cb4fa6c56cce6b1d119733ed9
+URL:		http://sourceforge.net/projects/rp-l2tp
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-#BuildRequires:	-
-#PreReq:		-
-#Requires(pre,post):	-
-#Requires(preun):	-
-#Requires(postun):	-
 Requires:	ppp
-#Provides:	-
 Obsoletes:	l2tpd
-#Conflicts:	-
-#BuildArch:	noarch
-#ExclusiveArch:  %{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-License:    GPL
-Source0:    http://www.l2tpd.org/downloads/%{name}-%{version}.tar.gz
 
 %description
 A Layer 2 Tunneling Protocol VPN daemon for Linux and other
@@ -42,8 +30,8 @@ systemów opartych na POSIX.
 %build
 # if ac/am/* rebuilding is necessary, do it in this order and add
 # appropriate BuildRequires
-#%%{__gettextize}
-#%{__libtoolize}
+%{__gettextize}
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -59,6 +47,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install l2tp.conf %{_sysconfdir}/l2tp.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,8 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS CREDITS ChangeLog NEWS README THANKS TODO
 
-# if _sysconfdir != /etc:
-#%%dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 
 %attr(755,root,root) %{_bindir}/*
@@ -88,8 +76,3 @@ rm -rf $RPM_BUILD_ROOT
 # initscript and its config
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
-
-%files subpackage
-%defattr(644,root,root,755)
-%doc extras/*.gz
-%{_datadir}/%{name}-ext
