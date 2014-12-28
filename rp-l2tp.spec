@@ -10,7 +10,7 @@ Source0:	http://dl.sourceforge.net/rp-l2tp/%{name}-%{version}.tar.gz
 URL:		http://sourceforge.net/projects/rp-l2tp/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	libtool
 Requires:	ppp
 Obsoletes:	l2tpd
